@@ -1,2 +1,2 @@
 # Daily Algebra Exercises
-![Nice](https://giphy.com/gifs/vibes-vibing-vibin-GeimqsH0TLDt4tScGw)
+![Vibe](https://media.giphy.com/media/GeimqsH0TLDt4tScGw/giphy.gif)
