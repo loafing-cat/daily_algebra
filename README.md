@@ -1,2 +1,2 @@
 # Daily Algebra Exercises
-![A cat playing with a ball of yarn](https://media.giphy.com/media/3o7btNa0RUYa5E7iiQ/giphy.gif)
+![Nice](https://giphy.com/gifs/vibes-vibing-vibin-GeimqsH0TLDt4tScGw)
