@@ -1,25 +1,27 @@
 import os
 import csv
 import sqlite3
-import pandas as pd
 
-# establish absolute path to root project : in order to run the script as a main file, the absolute path must be defined...if ran in interactive window, it gets imported as a module and can run 
 cwd = os.path.abspath(os.getcwd())
 
-# define path to my CSV file
 csv_path = os.path.join(cwd, 'construction_data', 'question_answer.csv')
 
-# open and read the CSV file
+db_path = os.path.join(cwd, 'app_data', 'questions.db')
+
+conn = sqlite3.connect(db_path)
+c = conn.cursor()
+c.execute('create table if not exists questions (id integer primary key, question text, answer text)')
+conn.commit()
+conn.close()
+
 with open(csv_path, newline = '') as csvfile:
     reader = csv.DictReader(csvfile)
-    for i in reader:
-        print(i)
-    rows = list(reader) # list reads all rows in file until the end : cannot print using for loop after this
+    rows = list(reader) 
     
-    
-
-
-
-df = pd.read_csv(csv_path)
-
-print(df)
+# add data to databse
+conn = sqlite3.connect(db_path)
+c = conn.cursor()
+for i in rows:
+    c.execute('insert into questions (question, answer) values (?, ?)', (i['questions'], i['answers']))
+conn.commit()
+conn.close()
