@@ -29,5 +29,6 @@ def index():
     # Render the index.html template with the question and answer
     return render_template('index.html', question=question, answer=answer)
 
+# turn off debug mode
 if __name__ == '__main__':
     app.run(debug=False)
