@@ -1,20 +1,63 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Daily Algebra</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .useful-links {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 50px;
+        margin-left: 50px;
+        text-align: left;
+      }
+
+      .useful-links h2 {
+        margin-right: 10px;
+      }
+
+      .useful-links a {
+        margin-right: 10px;
+      }
+
+      .logo {
+        width: 150px;
+      }
+
+    </style>
+    <script>
+      function revealAnswer() {
+        document.getElementById("answer").style.display = "block";
+        document.getElementById("reveal-button").style.display = "none";
+      }
+    </script>
   </head>
   <body>
+    <img class="logo" src="{{ url_for('static', filename='images/cat.png') }}" alt="Cat Image">
     <h1>Welcome to Daily Algebra!</h1>
     
-    {% if question is not none %}
-    <h2>Here's today's question:</h2>
+    <h2>Today's question is:</h2>
     <p>{{ question }}</p>
-    {% endif %}
 
-    {% if last_answer_seen is not none %}
-    <h2>Here's the previous day's answer:</h2>
-    <p>{{ last_answer }}</p>
-    {% endif %}
-    
+    <h2>Today's answer is:</h2>
+    <p id="answer" style="display:none">{{ answer }}</p>
+    <button id="reveal-button" onclick="revealAnswer()">Click to reveal</button>
+
+    <div class="useful-links">
+      <h2>Useful Links:</h2>
+      <a href="https://www.khanacademy.org/search?referer=%2F&page_search_query=Algebra">Khan Academy Algebra</a>
+      <a href="https://www.youtube.com/@TheMathSorcerer">The Math Sorcerer</a>
+      <a href="https://www.youtube.com/@3blue1brown">3Blue1Brown</a>
+    </div>
   </body>
 </html>
