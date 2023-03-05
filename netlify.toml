@@ -1,3 +1,4 @@
 [build]
-command = "python app.py"
-publish = "templates"
+base = "/"
+command = "gunicorn app:app"
+publish = "."
