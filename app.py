@@ -1,8 +1,12 @@
 from flask import Flask, render_template
 import sqlite3
 from datetime import datetime, timedelta
+import os
 
 app = Flask(__name__)
+
+# run in production
+os.environ['FLASK_ENV'] = 'production'
 
 # Define the route for the index page
 @app.route('/')
