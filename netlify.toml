@@ -1,4 +1,3 @@
 [build]
-  command = "gunicorn app:app"
+  command = "python app.py"
   publish = "."
-  runtime = "python3.8"
