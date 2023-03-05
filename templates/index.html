@@ -1,1 +1,20 @@
-home
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Daily Algebra</title>
+  </head>
+  <body>
+    <h1>Welcome to Daily Algebra!</h1>
+    
+    {% if question is not none %}
+    <h2>Here's today's question:</h2>
+    <p>{{ question }}</p>
+    {% endif %}
+
+    {% if last_answer_seen is not none %}
+    <h2>Here's the previous day's answer:</h2>
+    <p>{{ last_answer }}</p>
+    {% endif %}
+    
+  </body>
+</html>
