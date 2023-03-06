@@ -11,6 +11,12 @@ os.environ['FLASK_ENV'] = 'production'
 # Define the route for the index page
 @app.route('/')
 def index():
+    '''
+    Stuck on how to implement 24-hour logic... one way is to create a scheduled job locally to push to GitHub, but not ideal.
+    Better to have Heroku handle this, but something about multiple dynos (isolated instances, each having their own machine time). Need a way to synchronize (use Redis?).
+    Don't know much about Redis.
+    '''
+    
     # Connect to the database
     conn = sqlite3.connect('app_data/questions.db')
     c = conn.cursor()
