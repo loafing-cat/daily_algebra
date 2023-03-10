@@ -33,31 +33,151 @@
       .logo {
         width: 150px;
       }
+      
+      #particles-js {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: -1;
+      }
 
     </style>
+                <script>
+                  function revealAnswer() {
+                    document.getElementById("answer").style.display = "block";
+                    document.getElementById("reveal-button").style.display = "none";
+                  }
+                </script>
+                
+                  </head>
+                  <body>
+                    <img class="logo" src="{{ url_for('static', filename='images/cat.png') }}" alt="Cat Image">
+                    <h1>Welcome to Daily Algebra!</h1>
+                    <h2>Today's question is:</h2>
+                    <p>{{ question }}</p>
+                    
+                    <h2>Today's answer is:</h2>
+                    <p id="answer" style="display:none">{{ answer }}</p>
+                    <button id="reveal-button" onclick="revealAnswer()">Click to reveal</button>
+                    
+                    <div class="useful-links">
+                      <h2>Useful Links:</h2>
+                      <a href="https://www.khanacademy.org/search?referer=%2F&page_search_query=Algebra">Khan Academy Algebra</a>
+                      <a href="https://www.youtube.com/@TheMathSorcerer">The Math Sorcerer</a>
+                      <a href="https://www.youtube.com/@3blue1brown">3Blue1Brown</a>
+                    </div>
+                    
+                    <div id="particles-js"></div>
+
+    <script src="{{ url_for('static', filename='js/particles.min.js') }}"></script>
     <script>
-      function revealAnswer() {
-        document.getElementById("answer").style.display = "block";
-        document.getElementById("reveal-button").style.display = "none";
-      }
-    </script>
-  </head>
-  <body>
-    <img class="logo" src="{{ url_for('static', filename='images/cat.png') }}" alt="Cat Image">
-    <h1>Welcome to Daily Algebra!</h1>
-    
-    <h2>Today's question is:</h2>
-    <p>{{ question }}</p>
-
-    <h2>Today's answer is:</h2>
-    <p id="answer" style="display:none">{{ answer }}</p>
-    <button id="reveal-button" onclick="revealAnswer()">Click to reveal</button>
-
-    <div class="useful-links">
-      <h2>Useful Links:</h2>
-      <a href="https://www.khanacademy.org/search?referer=%2F&page_search_query=Algebra">Khan Academy Algebra</a>
-      <a href="https://www.youtube.com/@TheMathSorcerer">The Math Sorcerer</a>
-      <a href="https://www.youtube.com/@3blue1brown">3Blue1Brown</a>
-    </div>
-  </body>
-</html>
+      particlesJS("particles-js", {
+        "particles": {
+          "number": {
+            "value": 500, //original 150
+            "density": {
+              "enable": true,
+              "value_area": 1000
+            }
+          },
+          "color": {
+            "value": ["#4b4c4d", "#f8b195", "#f67280", "#c06c84", "#6c5b7b", "#355c7d", "#6c5b7b", "#c06c84", "#f67280", "#f8b195"]
+          },
+          "shape": {
+            "type": "circle",
+            "stroke": {
+              "width": 0,
+              "color": "#000000"
+            },
+            "polygon": {
+              "nb_sides": 5
+            }
+          },
+          "opacity": {
+            "value": 0.5,
+            "random": true,
+            "anim": {
+              "enable": true,
+              "speed": 1,
+              "opacity_min": 0.25,
+              "sync": false
+            }
+          },
+          "size": {
+            "value": 3,
+            "random": true,
+            "anim": {
+              "enable": false,
+              "speed": 4,
+              "size_min": 0.3,
+              "sync": false
+            }
+          },
+          "line_linked": {
+            "enable": false,
+            "distance": 150,
+            "color": "#ffffff",
+            "opacity": 0.4,
+            "width": 1
+          },
+          "move": {
+            "enable": true,
+            "speed": 3,  // original 1
+            "direction": "top", // original "none"
+            "random": true,
+            "straight": false,
+            "out_mode": "bounce", // original "out"
+            "bounce": true,
+            "attract": {
+              "enable": false,
+              "rotateX": 600, // original 600
+              "rotateY": 0 // original 1200
+            }
+          }
+        },
+        "interactivity": {
+          "detect_on": "canvas",
+          "events": {
+            "onhover": {
+              "enable": true,
+              "mode": "repulse"
+            },
+            "onclick": {
+              "enable": true,
+              "mode": "push"
+            },
+            "resize": true
+          },
+          "modes": {
+            "grab": {
+              "distance": 400,
+              "line_linked": {
+                "opacity": 1
+              }
+            },
+            "bubble": {
+              "distance": 400,
+              "size": 40,
+              "duration": 2,
+              "opacity": 8,
+              "speed": 3
+            },
+            "repulse": {
+              "distance": 200,
+              "duration": 0.4
+            },
+            "push": {
+              "particles_nb": 4
+            },
+            "remove": {
+              "particles_nb": 2
+            }
+          }
+        },
+        "retina_detect": true
+      });      
+                </script>
+                </body>
+                </html>

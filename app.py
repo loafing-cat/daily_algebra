@@ -37,7 +37,8 @@ def index():
     conn.close()
 
     # Render the index.html template with the question and answer
-    return render_template('index.html', question=question, answer=answer)
+    return render_template('index.html', question = question, answer = answer)
+    # return render_template('index_original.html', question = question, answer = answer)
 
 # turn off debug mode
 if __name__ == '__main__':
