@@ -1,6 +1,5 @@
 from flask import Flask, render_template
 import sqlite3
-from datetime import datetime, timedelta
 import os
 
 app = Flask(__name__)
@@ -21,16 +20,8 @@ def index():
     conn = sqlite3.connect('app_data/questions.db')
     c = conn.cursor()
 
-    # Get the current date
-    current_date = datetime.today().strftime('%Y-%m-%d')
-
-    # Get the ID of the next question to display
-    c.execute("SELECT id FROM questions ORDER BY id DESC LIMIT 1")
-    last_question_id = c.fetchone()[0]
-    question_id = (last_question_id % 2) + 1
-
     # Get the question and answer from the database
-    c.execute(f"SELECT question, answer FROM questions WHERE id = {question_id}")
+    c.execute("select question, answer from questions order by random() limit 1")
     question, answer = c.fetchone()
 
     # Close the database connection
