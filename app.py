@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 import sqlite3
 import os
+import json
 
 app = Flask(__name__)
 
@@ -31,7 +32,7 @@ def index():
     conn.close()
 
     # Render the index.html template with the question and answer
-    return render_template('index.html', question = question, answer = answer, measurement_id = MEASUREMENT_ID)
+    return render_template('index.html', question = question, answer = answer, measurement_id = json.dumps(MEASUREMENT_ID))
     # return render_template('index_original.html', question = question, answer = answer)
 
 # turn off debug mode
