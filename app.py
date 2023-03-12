@@ -7,6 +7,9 @@ app = Flask(__name__)
 # run in production
 os.environ['FLASK_ENV'] = 'production'
 
+# Get the measurement ID from environment variables
+MEASUREMENT_ID = os.environ.get('GA_MEASUREMENT_ID')
+
 # Define the route for the index page
 @app.route('/')
 def index():
@@ -28,7 +31,7 @@ def index():
     conn.close()
 
     # Render the index.html template with the question and answer
-    return render_template('index.html', question = question, answer = answer)
+    return render_template('index.html', question = question, answer = answer, measurement_id = MEASUREMENT_ID)
     # return render_template('index_original.html', question = question, answer = answer)
 
 # turn off debug mode
