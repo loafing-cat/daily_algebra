@@ -5,6 +5,8 @@ The intent is to have a new question-answer pair prompted every 24-hours, and it
 
 I've got the app to render, but I'm struggling with implementing the time logic and hosting it on Heroku.
 
+Cats are cool
+
 Here's what it looks like:
 <!-- ![Hidden Answer](static/images/demo1.png) -->
 <!-- ![Revealed Answer](static/images/demo2.png) -->
