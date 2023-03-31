@@ -2,40 +2,42 @@ from flask import Flask, render_template
 import sqlite3
 import os
 import json
+import datetime
 
 app = Flask(__name__)
 
-# run in production
+# run in production mode
 os.environ['FLASK_ENV'] = 'production'
 
-# Get the measurement ID from environment variables
-# MEASUREMENT_ID = os.environ.get('GA_MEASUREMENT_ID')
+# initialize global variables to track time
+current_qa = None
+current_qa_set_time = None
 
-# Define the route for the index page
-@app.route('/')
-def index():
-    '''
-    Stuck on how to implement 24-hour logic... one way is to create a scheduled job locally to push to GitHub, but not ideal.
-    Better to have Heroku handle this, but something about multiple dynos (isolated instances, each having their own machine time). Need a way to synchronize (use Redis?).
-    Don't know much about Redis.
-    '''
-    
-    # Connect to the database
+def get_new_qa():
     conn = sqlite3.connect('app_data/questions.db')
     c = conn.cursor()
-
-    # Get the question and answer from the database
-    c.execute("select question, answer from questions order by random() limit 1")
+    c.execute('select question, answer from questions order by random() limit 1')
     question, answer = c.fetchone()
-
-    # Close the database connection
     conn.close()
+    return question, answer
 
-    # Render the index.html template with the question and answer
-    # return render_template('index.html', question = question, answer = answer, measurement_id = json.dumps(MEASUREMENT_ID))
+def should_refresh_qa():
+    global current_qa_set_time
+    if current_qa_set_time is None:
+        return True
+    now = datetime.datetime.now()
+    time_passed = now - current_qa_set_time
+    return time_passed > datetime.timedelta(minutes = 5)
+
+@app.route('/')
+def index():
+    global current_qa, current_qa_set_time
+    if should_refresh_qa():
+        current_qa = get_new_qa()
+        current_qa_set_time = datetime.datetime.now()
+    
+    question, answer = current_qa
     return render_template('index.html', question = question, answer = answer)
-    # return render_template('index_original.html', question = question, answer = answer)
 
-# turn off debug mode
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug = False)
